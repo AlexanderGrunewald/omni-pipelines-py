@@ -1,5 +1,5 @@
 import numpy.random as npr
-from scanpy.sc import AnnData
+from scanpy import AnnData
 from time import time
 
 def run_baseline(
@@ -11,6 +11,7 @@ def run_baseline(
 ) -> AnnData:
     # generate random cluster assignments ####
     start_time = time()
+    npr.seed(seed)
     adata.obs["louvain"] = npr.randint(0, n_cluster, adata.n_obs)
     adata.obs["leiden"] = npr.randint(0, n_cluster, adata.n_obs)
     end_time = time()
