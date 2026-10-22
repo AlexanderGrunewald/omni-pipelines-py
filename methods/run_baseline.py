@@ -1,7 +1,7 @@
 import numpy.random as npr
 from scanpy import AnnData
 from time import time
-
+import numpy as np
 def run_baseline(
     adata: AnnData,
     n_cluster: int,
@@ -22,5 +22,16 @@ def run_baseline(
     clustering_info["resolutions"]["leiden"] = None
     clustering_info["num_runs"]["louvain"] = None
     clustering_info["num_runs"]["leiden"] = None
-
+    # add placeholder for t-SNE and UMAP embeddings
+    adata.obsm["X_tsne"] = np.zeros((adata.n_obs, 2))
+    adata.obsm["X_umap"] = np.zeros((adata.n_obs, 2))
+    # add placeholder for PCA embeddings and variance ratio
+    adata.obsm["X_pca"] = np.zeros((adata.n_obs, 50))
+    adata.uns["pca"] = {"variance_ratio": np.zeros(50)}
+    timings["pca"] = None
+    timings["t_sne"] = None
+    timings["umap"] = None
+    # add placeholder for highly variable genes
+    adata.var["highly_variable"] = np.zeros(adata.n_vars, dtype=bool)
+    
     return adata
