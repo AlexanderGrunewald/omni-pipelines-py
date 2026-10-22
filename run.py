@@ -34,7 +34,7 @@ parser.add_argument(
     help="input true number of clusters path",
 )
 parser.add_argument(
-    "--method_name", type=str, choices=["scanpy", "rapids"], help="Method to run"
+    "--method_name", type=str, choices=["scanpy", "rapids", "baseline"], help="Method to run"
 )
 parser.add_argument(
     "--d_cluster",
