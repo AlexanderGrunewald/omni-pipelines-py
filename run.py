@@ -67,6 +67,12 @@ parser.add_argument(
     default="manual",
     help="filtering strategy (manual uses suggested cutoffs; auto uses package QC)",
 )
+
+# ask for seed for reproducibility
+parser.add_argument(
+    "--seed", type=int, default=42, help="Random seed for reproducibility"
+)
+
 args, _ = parser.parse_known_args()
 
 # time object to store time involved (in seconds) in each step
@@ -129,7 +135,14 @@ elif args.method_name == "rapids":
         timings,
         clustering_info,
     )
-
+elif args.method_name == "baseline":
+    from methods.run_baseline import run_baseline
+    adata = run_baseline(
+        adata,
+        n_cluster,
+        timings,
+        clustering_info,
+    )
 # Save timings as JSON
 with open(os.path.join(args.output_dir, f"{args.name}.timings.json"), "w") as f:
     json.dump(timings, f, indent=2)
