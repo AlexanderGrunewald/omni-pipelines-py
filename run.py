@@ -142,6 +142,7 @@ elif args.method_name == "baseline":
         n_cluster,
         timings,
         clustering_info,
+        seed=args.seed,
     )
 # Save timings as JSON
 with open(os.path.join(args.output_dir, f"{args.name}.timings.json"), "w") as f:
